@@ -52,13 +52,14 @@ public class NisitTestRunner {
 
         Nisit empty = new Nisit();
         check("new() -> empty users", empty.usersize() == 0);
-        check("new() -> empty rooms", empty.roomsize() == 0);
+        check("new() -> room capacity is MAX_ROOMS",empty.getrooms() == Nisit.MAX_ROOMS);
         check("new() -> contains nothing users", !empty.usercontains("anything"));
-        check("new() -> contains nothing rooms", !empty.roomcontains("anything"));
+        check("new() -> contains nothing full", !empty.Fullroom());    
 
-        Nisit n = new Nisit(Arrays.asList("a", "b", "c"));
-        check("new(list) -> correct users size", n.usersize() == 3);
+        Nisit n = new Nisit(Arrays.asList("a", "b", "c"), 5);
+        check("new(list) -> correct users size", n.usersize() == 3); 
         check("new(list) -> contains b", n.usercontains("b"));
+        check("new(list) -> correct room capacity", n.getrooms() == 5);
     }
 
 }
