@@ -18,66 +18,84 @@ public class Nisit {
     private final List<String>  users;
     private final int rooms;
 
+    //แปลง RI ทุกข้อเป็น assert หนึ่งบรรทัด พร้อมข้อความอธิบาย
     private void checkRep() {
-        assert users != null;
-        assert rooms > 0;
-        assert rooms <= MAX_ROOMS   ;// ตรวจสอบว่าความจุห้องไม่เกิน MAX_ROOMS
-        assert users.size() <= rooms;// ตรวจสอบว่าจำนวนนิสิตไม่เกินความจุของห้อง
-
-    Set<String> seen = new HashSet<>();
-    for (String u : users) {
-        assert u != null;
-        assert seen.add(u);
-        }
+   
     }
     
     // ===== Creator =====
+    // สร้างห้องเรียนว่างที่มีความจุ MAX_ROOMS
     public Nisit(){
-        this.users = new ArrayList<>();
-        this.rooms = MAX_NISITS;
+        this.users = null;
+        this.rooms = 0;
         checkRep();
     }
+    // สร้างห้องเรียนว่างที่มีความจุเท่ากับ rooms
     public Nisit(int rooms) {
-    if (rooms <= 0 || rooms > MAX_NISITS) 
-        throw new IllegalArgumentException("invalid room capacity");//ทำการตรวจสอบความถูกต้องของจำนวนห้องเรียน ถ้าไม่ถูกต้องจะ throw exception
-    
-
-    this.users = new ArrayList<>();
+    this.users = null;
     this.rooms = rooms;
-    checkRep();
     }
+/**
+ * สร้างห้องเรียนที่มีนิสิตเริ่มต้นจาก initial และความจุเท่ากับ rooms
+ * @param initial รายชื่อนิสิตเริ่มต้น
+ * @param rooms ความจุของห้อง
+ * @throws IllegalArgumentException หาก initial เป็น null, rooms <= 0, rooms > MAX_ROOMS, หรือ initial.size() > rooms
+ */
+  
     public Nisit(List<String> initial, int rooms) {
-    if (initial == null)
-        throw new IllegalArgumentException("initial list must not be null");
-
-    if (rooms <= 0 || rooms > MAX_ROOMS)
-        throw new IllegalArgumentException("invalid room capacity");// ตรวจสอบว่าความจุห้องถูกต้อง (ต้องมากกว่า 0 และไม่เกิน MAX_ROOMS)
-
-    if (initial.size() > rooms)
-        throw new IllegalArgumentException("too many students");// ตรวจสอบว่าจำนวนนิสิตไม่เกินความจุของห้อง
-
-    this.users = new ArrayList<>(initial);
-    this.rooms = rooms;
+    this.users = null;
+    this.rooms = 0;
     checkRep();
     }
     
+    //===== mutator =====
+/**
+ * เพิ่มนิสิตใหม่ลงในห้องเรียน
+ * @param user ชื่อ-นามสกุลของนิสิตใหม่ ต้องไม่เป็น null และไม่เป็นสตริงว่าง
+ * @return true หากเพิ่มนิสิตสำเร็จ, false หากห้องเต็มหรือนิสิตซ้ำ
+ * @throws IllegalArgumentException หาก user เป็น null
+ */
+    public boolean add(String user) {
+        return false;
+    }
+/**
+ * ลบนิสิตออกจากห้องเรียน
+ * @param user ชื่อ-นามสกุลของนิสิตที่ต้องการลบ
+ * @return true หากลบนิสิตสำเร็จ, false หากนิสิตไม่พบในห้อง
+ */
+     public boolean remove(String user) {
+        return false;
+    }
 
+    //===== observer =====
+     // คืนค่าจำนวนของนิสิตในห้องเรียน
     public int usersize() {
-        return users.size();//คืนค่าจำนวนของนิสิต
+        return 0;
     }
+    // คืนค่าความจุของห้องเรียน
     public int getrooms() {
-        return rooms;//คืนค่าความจุของห้อง
+        return 0;
     }
 
     
-    
+    // ตรวจสอบว่ามีชื่อ-นามสกุลนิสิตที่ระบุอยู่ในห้องหรือไม่
+    // คืนค่า: true หากมี, false หากไม่มี
     public boolean usercontains(String user){
-        return users.contains(user); //คืนค่าความจริงว่ามีชื่อ-นามสกุลนิสิตที่ระบุอยู่ในห้องหรือไม่
+        return false;
     }
+    // ตรวจสอบว่าห้องเรียนเต็มหรือไม่
+    // คืนค่า: true หากห้องเต็ม, false หากห้องยังไม่เต็ม
+    // ห้องเต็มหมายถึงจำนวนนิสิตในห้อง >= ความจุของห้อง
     public boolean Fullroom() {
-    return users.size() >= rooms;//คืนว่าถ้าห้องเต็มแล้วจะ return true
+    return false;
     }
 
-    
+    //===== producer =====
+
+    // คืนสำเนารายชื่อนิสิตทั้งหมด
+    // ผลลัพธ์: คืน List ใหม่ที่มีข้อมูลเหมือนกับรายชื่อนิสิตในห้อง
+    public List<String> getusers() {
+        return null;
+    }
     
 }
